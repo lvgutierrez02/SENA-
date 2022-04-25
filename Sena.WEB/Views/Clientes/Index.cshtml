@@ -1,0 +1,109 @@
+﻿@model IEnumerable<Sena.Models.Entities.Cliente>
+@section Styles{
+
+}
+
+@{
+    //Layout = null;
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="table-responsive">
+            <div class="col-md-5">
+                <h2><b>@ViewBag.Titulo</b></h2>
+
+            </div>
+            <div>
+                <a onclick="mostrarModal('@Url.Action("Crear","Clientes",null,Context.Request.Scheme)','Crear cliente')" class="btn btn-success">Crear Cliente </a>
+            </div>
+            <br />
+<table id="tabla" class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombres)
+            </th> 
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoDocumentoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Documento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var cliente in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => cliente.Nombres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => cliente.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => cliente.TipoDocumento.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => cliente.Documento)
+            </td>
+
+            <td>
+               @if (cliente.Estado)
+                  {
+                        <span class="badge bg-primary">Activo</span>
+                  }else{
+                    <span class="badge bg-danger">Inactivo</span>
+                  }
+            </td>
+             <td>
+                  <a class="text-primary" href="javascript:mostrarModal('@Url.Action("Editar","Clientes",new {id=cliente.ClienteId},Context.Request.Scheme)','Editar cliente')"><i title="Editar" class="fas fa-edit"></i></a> |
+                  <a class="text-success" href="javascript:mostrarModal('@Url.Action("Detalle","Clientes",new{id=cliente.ClienteId},Context.Request.Scheme)','Detalle del cliente')"><i title="Detalle del cliente" class="fas fa-search"></i></a> |
+                  @if (cliente.Estado.Equals("Activo"))
+                     {
+                       <a class="text-danger" href="javascript:cambiarEstado('@Url.Action("CambiarEstado","Clientes",new{id=cliente.ClienteId},Context.Request.Scheme)')"><i title="Deshabilitar cliente" class="fas fa-user-slash"></i></a>
+
+                     }
+                      else
+                     {
+                       <a class="text-danger" href="javascript:cambiarEstado('@Url.Action("CambiarEstado","Clientes",new{id=cliente.ClienteId},Context.Request.Scheme)')"><i title="Habilitar cliente" class="fas fa-user-check"></i></a>
+
+                     }             
+           </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+        </div>
+    </div>
+
+    @section Scripts{
+
+    <script src="~/js/site.js"></script>
+    <script src="~/js/tabla.js"></script>
+    
+    <script>
+        @if(TempData["Accion"]!= null && TempData["Accion"].ToString().Equals("Guardar"))
+         {
+              <text>
+                     alertify.set('notifier','position', 'top-right');
+                     alertify.success('@TempData["Mensaje"]');
+          
+              </text>
+         
+         }
+    </script>
+    
+    }
+    
+</div>
+
+

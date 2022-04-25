@@ -1,0 +1,41 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "limonte-sweetalert2@11.4.8",
+      "destination": "wwwroot/lib/limonte-sweetalert2/"
+    },
+    {
+      "library": "font-awesome@6.1.1",
+      "destination": "wwwroot/lib/font-awesome/"
+    },
+    {
+      "library": "datatables@1.10.21",
+      "destination": "wwwroot/datatables/"
+    },
+    {
+      "library": "AlertifyJS@1.13.1",
+      "destination": "wwwroot/lib/AlertifyJS/",
+      "files": [
+        "alertify.min.js",
+        "css/themes/bootstrap.css",
+        "css/themes/bootstrap.min.css",
+        "css/themes/bootstrap.rtl.css",
+        "css/themes/bootstrap.rtl.min.css",
+        "css/themes/default.css",
+        "css/themes/default.min.css",
+        "css/themes/default.rtl.css",
+        "css/themes/default.rtl.min.css",
+        "css/themes/semantic.css",
+        "css/themes/semantic.min.css",
+        "css/themes/semantic.rtl.css",
+        "css/themes/semantic.rtl.min.css",
+        "css/alertify.css",
+        "css/alertify.min.css",
+        "css/alertify.rtl.css",
+        "css/alertify.rtl.min.css"
+      ]
+    }
+  ]
+}
