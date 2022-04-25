@@ -15,7 +15,7 @@ namespace Sena.WEB.Helpers
 {
     public class Helper
     {
-        public static string RenderRazorViewToString(Controller controller, string viewName, object model = null)
+        public static string RenderRazorViewToString(Controller controller, string viewName, object model = null) // carga el modal con los errores nuevamente si no ingresó los campos requeridos
         {
             controller.ViewData.Model = model;
             using (var sw = new StringWriter())
@@ -36,7 +36,7 @@ namespace Sena.WEB.Helpers
             }
         }
     }
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)] //Redirecciona a donde yo le diga si la ruta que ingresó de manera directa por el navegador no se encuentra, solo ingresa a traves de javascript
     public class NoDirectAccessAttribute : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
@@ -44,7 +44,7 @@ namespace Sena.WEB.Helpers
             if (filterContext.HttpContext.Request.GetTypedHeaders().Referer == null ||
                 filterContext.HttpContext.Request.GetTypedHeaders().Host.Host.ToString() != filterContext.HttpContext.Request.GetTypedHeaders().Referer.Host.ToString())
             {
-                filterContext.HttpContext.Response.Redirect("../Clientes/Index");
+                filterContext.HttpContext.Response.Redirect("../Clientes/Index"); //Redirecciona a donde yo le diga si la ruta que ingresó de manera directa no se encuentra
             }
         }
     }
