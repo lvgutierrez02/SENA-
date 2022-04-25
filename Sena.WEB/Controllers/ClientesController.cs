@@ -5,6 +5,7 @@ using Sena.Business.Abstract;
 using Sena.Business.Business;
 using Sena.DAL;
 using Sena.Models.Entities;
+using Sena.WEB.Helpers;
 using System;
 using System.Threading.Tasks;
 
@@ -59,7 +60,7 @@ namespace Sena.WEB.Controllers
             TempData["Accion"] = "Validación";
             TempData["Mensaje"] = "Debe llenar los campos requeridos";
             ViewBag.TiposDocumento = new SelectList(await _tipoDocumentoBusiness.ObtenerTiposDocumento(), "TipoDocumentoId", "Nombre");
-            return View();
+            return Json(new { isValid = false, tipoError = "warning", error = "Debe diligenciar los campos requeridos", html = Helper.RenderRazorViewToString(this, "Crear", cliente) });
 
         }
 
