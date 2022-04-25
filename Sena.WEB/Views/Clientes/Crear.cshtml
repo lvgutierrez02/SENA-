@@ -44,9 +44,10 @@
 </div>
 
 
-
+ @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+ @*
 @section Scripts {
-   @* @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@
+   
     
     <script>
             @if(TempData["Accion"]!= null && TempData["Accion"].ToString().Equals("Validación"))
@@ -73,3 +74,4 @@
         }); 
     </script>
 }
+*@
