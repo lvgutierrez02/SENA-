@@ -45,6 +45,9 @@ namespace Sena.WEB.Helpers
                 filterContext.HttpContext.Request.GetTypedHeaders().Host.Host.ToString() != filterContext.HttpContext.Request.GetTypedHeaders().Referer.Host.ToString())
             {
                 filterContext.HttpContext.Response.Redirect("../Clientes/Index"); //Redirecciona a donde yo le diga si la ruta que ingresó de manera directa no se encuentra
+                filterContext.HttpContext.Response.Redirect("../Clientes/Crear");
+                filterContext.HttpContext.Response.Redirect("../Clientes/Detalle");
+                filterContext.HttpContext.Response.Redirect("../Clientes/Editar");
             }
         }
     }

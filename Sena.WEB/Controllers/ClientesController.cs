@@ -57,8 +57,8 @@ namespace Sena.WEB.Controllers
                     return Json(new { isValid = false, tipoError = "error", error = "Error al crear el registro" });
                 }
             }
-            TempData["Accion"] = "Validación";
-            TempData["Mensaje"] = "Debe llenar los campos requeridos";
+            //TempData["Accion"] = "Validación";
+            //TempData["Mensaje"] = "Debe llenar los campos requeridos";
             ViewBag.TiposDocumento = new SelectList(await _tipoDocumentoBusiness.ObtenerTiposDocumento(), "TipoDocumentoId", "Nombre");
             return Json(new { isValid = false, tipoError = "warning", error = "Debe diligenciar los campos requeridos", html = Helper.RenderRazorViewToString(this, "Crear", cliente) });
 
