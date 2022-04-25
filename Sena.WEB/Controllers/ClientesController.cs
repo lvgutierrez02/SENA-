@@ -43,9 +43,10 @@ namespace Sena.WEB.Controllers
                     _clienteBusiness.Crear(cliente);
                     var guardar = await _clienteBusiness.GuardarCambios();
                     if (guardar) {
-                        TempData["Accion"] = "Guardar";
-                        TempData["Mensaje"] = $"Se creó con exito el cliente {cliente.Nombres}";
-                        return RedirectToAction("Index");
+                        //TempData["Accion"] = "Guardar";
+                        //TempData["Mensaje"] = $"Se creó con exito el cliente {cliente.Nombres}";
+                        //return RedirectToAction("Index");
+                        return Json(new { isValid = true, operacion = "crear" });
 
                     }
                 }
