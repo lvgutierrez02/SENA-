@@ -49,6 +49,35 @@ namespace Sena.DAL.Migrations
                     b.HasIndex("TipoDocumentoId");
 
                     b.ToTable("Clientes");
+
+                    b.HasData(
+                        new
+                        {
+                            ClienteId = 1,
+                            Documento = "123456789",
+                            Email = "generado@generado.com",
+                            Estado = true,
+                            Nombres = "Cliente generado",
+                            TipoDocumentoId = 1
+                        },
+                        new
+                        {
+                            ClienteId = 2,
+                            Documento = "987654321",
+                            Email = "generado2@generado.com",
+                            Estado = true,
+                            Nombres = "Cliente generado 2",
+                            TipoDocumentoId = 2
+                        },
+                        new
+                        {
+                            ClienteId = 3,
+                            Documento = "88990022",
+                            Email = "generado3@generado.com",
+                            Estado = true,
+                            Nombres = "Cliente generado 3",
+                            TipoDocumentoId = 3
+                        });
                 });
 
             modelBuilder.Entity("Sena.Models.Entities.TipoDocumento", b =>
@@ -61,11 +90,38 @@ namespace Sena.DAL.Migrations
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
-                        .HasColumnName("Nombre");
+                        .HasColumnName("Tipo de documento");
 
                     b.HasKey("TipoDocumentoId");
 
                     b.ToTable("TiposDocumento");
+
+                    b.HasData(
+                        new
+                        {
+                            TipoDocumentoId = 1,
+                            Nombre = "TI"
+                        },
+                        new
+                        {
+                            TipoDocumentoId = 2,
+                            Nombre = "CC"
+                        },
+                        new
+                        {
+                            TipoDocumentoId = 3,
+                            Nombre = "CE"
+                        },
+                        new
+                        {
+                            TipoDocumentoId = 4,
+                            Nombre = "PASAPORTE"
+                        },
+                        new
+                        {
+                            TipoDocumentoId = 5,
+                            Nombre = "CONTRASEÑA"
+                        });
                 });
 
             modelBuilder.Entity("Sena.Models.Entities.Cliente", b =>

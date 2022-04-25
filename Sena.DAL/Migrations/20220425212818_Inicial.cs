@@ -12,7 +12,7 @@ namespace Sena.DAL.Migrations
                 {
                     TipoDocumentoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(50)", nullable: false)
+                    Tipodedocumento = table.Column<string>(name: "Tipo de documento", type: "nvarchar(50)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -41,6 +41,33 @@ namespace Sena.DAL.Migrations
                         principalColumn: "TipoDocumentoId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "TiposDocumento",
+                columns: new[] { "TipoDocumentoId", "Tipo de documento" },
+                values: new object[,]
+                {
+                    { 1, "TI" },
+                    { 2, "CC" },
+                    { 3, "CE" },
+                    { 4, "PASAPORTE" },
+                    { 5, "CONTRASEÑA" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Clientes",
+                columns: new[] { "ClienteId", "Documento", "Email", "Estado", "NombreCliente", "TipoDocumentoId" },
+                values: new object[] { 1, "123456789", "generado@generado.com", true, "Cliente generado", 1 });
+
+            migrationBuilder.InsertData(
+                table: "Clientes",
+                columns: new[] { "ClienteId", "Documento", "Email", "Estado", "NombreCliente", "TipoDocumentoId" },
+                values: new object[] { 2, "987654321", "generado2@generado.com", true, "Cliente generado 2", 2 });
+
+            migrationBuilder.InsertData(
+                table: "Clientes",
+                columns: new[] { "ClienteId", "Documento", "Email", "Estado", "NombreCliente", "TipoDocumentoId" },
+                values: new object[] { 3, "88990022", "generado3@generado.com", true, "Cliente generado 3", 3 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Clientes_TipoDocumentoId",

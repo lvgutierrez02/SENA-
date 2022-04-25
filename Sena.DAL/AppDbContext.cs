@@ -15,6 +15,13 @@ namespace Sena.DAL
 
         }
 
+        //Esto lo utilizamos para llenar las tablas (seeder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Seed();
+
+        }
 
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<TipoDocumento> TiposDocumento { get; set; }

@@ -27,6 +27,16 @@ namespace Sena.DAL
                {
                    TipoDocumentoId = 3,
                    Nombre = "CE"
+               },
+               new TipoDocumento
+               {
+                   TipoDocumentoId = 4,
+                   Nombre = "PASAPORTE"
+               },
+               new TipoDocumento
+               {
+                   TipoDocumentoId = 5,
+                   Nombre = "CONTRASEÑA"
                }
             );
 
