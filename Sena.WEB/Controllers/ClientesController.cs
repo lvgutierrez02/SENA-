@@ -53,7 +53,7 @@ namespace Sena.WEB.Controllers
                 catch (Exception)
                 {
 
-                    throw;
+                    return Json(new { isValid = false, tipoError = "error", error = "Error al crear el registro" });
                 }
             }
             TempData["Accion"] = "Validación";
