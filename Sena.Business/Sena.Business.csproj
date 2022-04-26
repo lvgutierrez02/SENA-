@@ -9,8 +9,4 @@
     <ProjectReference Include="..\Sena.Models\Sena.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DTOs\usuarios\" />
-  </ItemGroup>
-
 </Project>
