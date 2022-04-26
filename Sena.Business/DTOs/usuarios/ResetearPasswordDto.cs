@@ -7,13 +7,10 @@ using System.Threading.Tasks;
 
 namespace Sena.Business.DTOs.usuarios
 {
-    public class RegistrarUsuarioDto
+    public class ResetearPassword
     {
         [Required(ErrorMessage = "El email es requerido")]
-        [Display(Name = "Email", Order = -9,
-        Prompt = "Ingrese el email", Description = "Email")]
-        [EmailAddress(ErrorMessage = "Email")]
-        [DataType(DataType.EmailAddress)]
+        [EmailAddress(ErrorMessage = "Email invalido")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "La contraseña es requerida")]
@@ -30,5 +27,6 @@ namespace Sena.Business.DTOs.usuarios
             ErrorMessage = "El Password y confirmar password debe coincidir")]
         public string ConfirmarPassword { get; set; }
 
+        public string Token { get; set; }
     }
 }

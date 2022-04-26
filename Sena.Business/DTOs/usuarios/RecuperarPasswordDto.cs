@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Sena.Business.DTOs.usuarios
 {
-    public class UsuarioDto
+    public class RecuperarPasswordDto
     {
-        public string Id { get; set; }
+        [Required(ErrorMessage = "El email es requerido")]
+        [EmailAddress(ErrorMessage = "Email inválido")]
         public string Email { get; set; }
-        public bool Estado { get; set; }
     }
 }
