@@ -53,8 +53,18 @@ namespace Sena.Business
                 throw new ArgumentNullException(nameof(id));  
             
             return await _context.Clientes.Include(x=>x.TipoDocumento).FirstOrDefaultAsync(x=>x.ClienteId==id);   
-        }    
+        }
 
 
-    } 
+        public void Editar(Cliente cliente)
+        {
+            if (cliente == null)
+                throw new ArgumentNullException(nameof(cliente));
+            _context.Update(cliente);
+        }
+        
+
+
+
+    }
 }

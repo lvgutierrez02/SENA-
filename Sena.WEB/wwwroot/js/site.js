@@ -61,6 +61,7 @@
         //alert(mensaje);
         alertify.confirm(titulo, mensaje,
             function () {
+                
                 try {
                     $.ajax({
                         type: 'POST',

@@ -14,6 +14,7 @@ namespace Sena.Business.Abstract
         Task<IEnumerable<Cliente>> ObtenerPorTipoDocumento(int tipoDocumento);
         Task<Cliente> ObtenerClientePorId(int? id);
         void Crear(Cliente cliente);
+        void Editar(Cliente cliente);
         Task<bool> GuardarCambios();
     }
 }
