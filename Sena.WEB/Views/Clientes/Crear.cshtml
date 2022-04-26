@@ -1,12 +1,12 @@
-﻿@model Sena.Models.Entities.Cliente
-
+﻿@model Sena.Business.DTOs.clientes.RegistroClienteDto
 @{
     Layout = null;
 }
 
+
 <div class="row">
     <div class="col-md-12">
-        <form asp-action="Crear" onsubmit="return jQueryAjaxPost(this,'Crear cliente', '¿Desea crear el cliente?')" autocomplete="off" id="formulario" > 
+        <form id="formulario" asp-action="Crear" onsubmit="return jQueryAjaxPost(this, 'Crear cliente', '¿Desea crear el cliente?')" autocomplete="off">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Nombres" class="control-label"></label>
@@ -20,9 +20,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="TipoDocumentoId" class="control-label"></label>
-                <select asp-items="@ViewBag.TiposDocumento" asp-for="TipoDocumentoId" class="form-control" > 
-                    <option>-- Seleccione el tipo de documento --</option>
-
+                <select asp-items="@ViewBag.TiposDocumento" asp-for="TipoDocumentoId" class="form-control">
+                    <option disabled>--- Seleccione ---</option>
                 </select>
                 <span asp-validation-for="TipoDocumentoId" class="text-danger"></span>
             </div>
@@ -31,11 +30,7 @@
                 <input asp-for="Documento" class="form-control" />
                 <span asp-validation-for="Documento" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
-                <label asp-for="Estado" class="control-label"></label>
-                <input asp-for="Estado" class="form-control" />
-                <span asp-validation-for="Estado" class="text-danger"></span>
-            </div>*@
+
             <div class="form-group">
                 <input type="submit" value="Guardar" class="btn btn-primary" id="submit-all" />
             </div>
@@ -43,35 +38,5 @@
     </div>
 </div>
 
-<script scrc="~/js/site.js">  </script>
- @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
- @*
-@section Scripts {
-   
-    
-    <script>
-            @if(TempData["Accion"]!= null && TempData["Accion"].ToString().Equals("Validación"))
-         {
-              <text>
-                     alertify.set('notifier','position', 'top-right');
-                     alertify.success('@TempData["Mensaje"]');
-          
-              </text>
-         
-         }
-    
-    </script>
-
-    <script>
-        var submitButton = document.querySelector("#submit-all");
-        submitButton.addEventListener("click", function(){
-                
-            if (!$("#formulario").valid()){
-                alertify.set('notifier','position', 'top-right');
-                 alertify.warning('Debe ingresar todos los campos');
-            }
-         
-        }); 
-    </script>
-}
-*@
+<script src="~/js/site.js"></script>
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

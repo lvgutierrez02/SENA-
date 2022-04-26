@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Sena.Business.Abstract;
 using Sena.Business.Business;
+using Sena.Business.DTOs.clientes;
 using Sena.DAL;
 using Sena.Models.Entities;
 using Sena.WEB.Helpers;
@@ -15,43 +17,45 @@ namespace Sena.WEB.Controllers
     {
         private readonly IClienteBusiness _clienteBusiness;
         private readonly ITipoDocumentoBusiness _tipoDocumentoBusiness;
+
         public ClientesController(IClienteBusiness clienteBusiness, ITipoDocumentoBusiness tipoDocumentoBusiness)
         {
             _clienteBusiness = clienteBusiness;
             _tipoDocumentoBusiness = tipoDocumentoBusiness;
         }
 
+        [Authorize(Roles = "Administrador, Usuario")]
         public async Task<IActionResult> Index()
         {
-            ViewBag.Titulo = "Gestión de clientes";
+            ViewBag.Titulo = "Gestión de Clientes";
             return View(await _clienteBusiness.ObtenerClientes());
         }
 
-
+        [Authorize(Roles = "Administrador")]
         [NoDirectAccessAttribute]
         [HttpGet]
-        public async Task<IActionResult> Crear() {
+        public async Task<IActionResult> Crear()
+        {
             ViewBag.Titulo = "Crear cliente";
             ViewBag.TiposDocumento = new SelectList(await _tipoDocumentoBusiness.ObtenerTiposDocumento(), "TipoDocumentoId", "Nombre");
             return View();
         }
-
+        [Authorize(Roles = "Administrador")]
 
         [HttpPost]
-        public async Task<IActionResult> Crear(Cliente cliente)
+        public async Task<IActionResult> Crear(RegistroClienteDto registroClienteDto)
         {
-            if (ModelState.IsValid) {
+            if (ModelState.IsValid)
+            {
                 try
                 {
-                    _clienteBusiness.Crear(cliente);
+                    _clienteBusiness.Crear(registroClienteDto);
                     var guardar = await _clienteBusiness.GuardarCambios();
-                    if (guardar) {
-                        //TempData["Accion"] = "Guardar";
-                        //TempData["Mensaje"] = $"Se creó con exito el cliente {cliente.Nombres}";
-                        //return RedirectToAction("Index");
+                    if (guardar)
+                    {
                         return Json(new { isValid = true, operacion = "crear" });
-
                     }
+
                 }
                 catch (Exception)
                 {
@@ -59,39 +63,36 @@ namespace Sena.WEB.Controllers
                     return Json(new { isValid = false, tipoError = "error", error = "Error al crear el registro" });
                 }
             }
-            //TempData["Accion"] = "Validación";
-            //TempData["Mensaje"] = "Debe llenar los campos requeridos";
             ViewBag.TiposDocumento = new SelectList(await _tipoDocumentoBusiness.ObtenerTiposDocumento(), "TipoDocumentoId", "Nombre");
-            return Json(new { isValid = false, tipoError = "warning", error = "Debe diligenciar los campos requeridos", html = Helper.RenderRazorViewToString(this, "Crear", cliente) });
-
+            return Json(new { isValid = false, tipoError = "warning", error = "Debe diligenciar los campos requeridos", html = Helper.RenderRazorViewToString(this, "Crear", registroClienteDto) });
         }
-
-
+        [Authorize(Roles = "Administrador, Usuario")]
         [NoDirectAccessAttribute]
-        [HttpGet]
-        public async Task<IActionResult> Detalle(int ? id )
+        public async Task<IActionResult> Detalle(int? id)
         {
-            if (id != null) {
+            if (id != null)
+            {
                 try
                 {
                     var cliente = await _clienteBusiness.ObtenerClientePorId(id);
-                    if (cliente != null) { 
-                    
-                        return View(cliente);   
+                    if (cliente != null)
+                    {
+                        return View(cliente);
+
                     }
                     return Json(new { isValid = false, tipoError = "error", mensaje = "Error interno" });
+
                 }
                 catch (Exception)
                 {
 
                     return Json(new { isValid = false, tipoError = "error", mensaje = "Error interno" });
                 }
-            
+
             }
             return Json(new { isValid = false, tipoError = "error", mensaje = "Error interno" });
         }
-
-
+        [Authorize(Roles = "Administrador")]
         [NoDirectAccessAttribute]
         [HttpGet]
         public async Task<IActionResult> Editar(int? id)
@@ -118,7 +119,7 @@ namespace Sena.WEB.Controllers
             }
             return NotFound();
         }
-        
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public async Task<IActionResult> Editar(int? id, Cliente cliente)
         {
@@ -146,9 +147,7 @@ namespace Sena.WEB.Controllers
             ViewBag.TiposDocumento = new SelectList(await _tipoDocumentoBusiness.ObtenerTiposDocumento(), "TipoDocumentoId", "Nombre");
             return Json(new { isValid = false, tipoError = "warning", error = "Debe diligenciar los campos requeridos", html = Helper.RenderRazorViewToString(this, "Editar", cliente) });
         }
-
-
-
+        [Authorize(Roles = "Administrador")]
         [NoDirectAccessAttribute]
         public async Task<IActionResult> CambiarEstado(int? id)
         {
@@ -183,9 +182,6 @@ namespace Sena.WEB.Controllers
             }
             return Json(new { isValid = false, tipoError = "error", mensaje = "Error interno" });
         }
-
-
-
 
     }
 }

@@ -8,5 +8,12 @@ namespace Sena.Business.DTOs.clientes
 {
     public class ClienteDetalleGestionarDto
     {
+
+        public int ClienteId { get; set; }
+        public string Nombres { get; set; }
+        public string Email { get; set; }
+        public string Documento { get; set; }
+        public string Estado { get; set; }
+        public string TipoDocumento { get; set; }
     }
 }
