@@ -2,7 +2,7 @@
 
 
     cambiarEstado = (url) => {
-        alert(url);
+        /*alert(url);*/
         $.ajax({
             type: 'GET',
             url: url,
@@ -61,7 +61,6 @@
         //alert(mensaje);
         alertify.confirm(titulo, mensaje,
             function () {
-                
                 try {
                     $.ajax({
                         type: 'POST',
@@ -75,7 +74,7 @@
                                 if (res.operacion == "crear") {
                                     mensaje = "Registro creado exitosamente";
                                 }
-                                if (res.operacion == "ok") {  
+                                if (res.operacion == "ok") {
                                     mensaje = res.mensaje;
                                 }
 
@@ -119,6 +118,3 @@
     }
 
 });
-
-
-  
