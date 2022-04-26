@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Sena.Business.DTOs
 {
-    internal class TipoDocumentoDto
+    public class TipoDocumentoDto
     {
+
+
     }
 }

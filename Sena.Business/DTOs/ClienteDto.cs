@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Sena.Business.DTOs
 {
-    internal class ClienteDto
+    public  class ClienteDto
     {
+
     }
 }

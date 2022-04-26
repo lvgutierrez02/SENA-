@@ -2,7 +2,7 @@
 
 
     cambiarEstado = (url) => {
-        /*alert(url);*/
+        alert(url);
         $.ajax({
             type: 'GET',
             url: url,

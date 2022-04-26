@@ -149,7 +149,40 @@ namespace Sena.WEB.Controllers
 
 
 
+        [NoDirectAccessAttribute]
+        public async Task<IActionResult> CambiarEstado(int? id)
+        {
+            if (id != null)
+            {
+                try
+                {
+                    var cliente = await _clienteBusiness.ObtenerClientePorId(id);
+                    if (cliente != null)
+                    {
+                        //cliente.Estado = !cliente.Estado;
+                        if (cliente.Estado)
+                            cliente.Estado = false;
+                        else
+                            cliente.Estado = true;
+                        _clienteBusiness.Editar(cliente);
 
+                        var guardar = await _clienteBusiness.GuardarCambios();
+                        if (guardar)
+                            return Json(new { isValid = true });
+
+                    }
+                    return Json(new { isValid = false, tipoError = "error", mensaje = "Error interno" });
+
+                }
+                catch (Exception)
+                {
+
+                    return Json(new { isValid = false, tipoError = "error", mensaje = "Error interno" });
+                }
+
+            }
+            return Json(new { isValid = false, tipoError = "error", mensaje = "Error interno" });
+        }
 
 
 
