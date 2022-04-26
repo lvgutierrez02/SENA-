@@ -16,6 +16,15 @@ namespace Sena.Models.Entities
         [Required(ErrorMessage = "Este campo es obligatorio")]
         public string Nombre { get; set; }
 
-        public virtual List<Cliente> Clientes { get; set; } 
+        public virtual List<Cliente> Clientes { get; set; }
+
+
+        //public class TipoDocumento
+        //{
+        //    public int TipoDocumentoId { get; set; }
+        //    public string Nombre { get; set; }
+
+        //    public virtual List<Cliente> Clientes { get; set; }
+        //}
     }
 }
