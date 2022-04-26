@@ -26,7 +26,7 @@
                 <a href="../../index2.html" class="h1"><b>Admin</b>LTE</a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                <p class="login-box-msg">Iniciar sesión</p>
 
                 <form asp-action="Login" asp-controller="Usuarios">
                     <div class="input-group mb-3">
@@ -64,13 +64,13 @@
                         <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
                     </div>
                 </form>
-
+                <br />
 
                 <p class="mb-1">
                     <a asp-action="OlvidePassword">Olvidé contraseña</a>
                 </p>
                 <p class="mb-0">
-                    <a href="register.html" class="text-center">Registro</a>
+                    <a asp-action="Crear" class="text-center">Registrarse</a>
                 </p>
             </div>
             <!-- /.card-body -->
