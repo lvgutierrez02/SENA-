@@ -26,5 +26,6 @@ namespace Sena.DAL
 
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<TipoDocumento> TiposDocumento { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
     }
 }
