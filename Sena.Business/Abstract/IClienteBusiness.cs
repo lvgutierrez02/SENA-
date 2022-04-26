@@ -13,12 +13,8 @@ namespace Sena.Business.Abstract
 
         Task<IEnumerable<ClienteDetalleGestionarDto>> ObtenerClientes();
         void Crear(RegistroClienteDto registroClienteDto);
-
-
-
-        Task<IEnumerable<Cliente>> ObtenerPorTipoDocumento(int tipoDocumento);
+        Task<IEnumerable<Cliente>> ObtenerClientesPorTipoDocumento(int tipoDocumento);
         Task<Cliente> ObtenerClientePorId(int? id);
-        void Crear(Cliente cliente);
         void Editar(Cliente cliente);
         Task<bool> GuardarCambios();
     }
