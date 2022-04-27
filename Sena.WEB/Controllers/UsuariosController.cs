@@ -28,6 +28,7 @@ namespace Sena.WEB.Controllers
             _userManager = userManager;
             _roleManager = roleManager;
         }
+
         [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Index()
         {
@@ -121,7 +122,7 @@ namespace Sena.WEB.Controllers
                     //Metodo tradicional de enviar correos por smtp
                     MailMessage mensaje = new();
                     mensaje.To.Add(recuperarPasswordDto.Email); //destinatario
-                    mensaje.Subject = "HelloShop recuperar password";
+                    mensaje.Subject = "SENA recuperar password";
                     mensaje.Body = passwordresetLink;
                     mensaje.IsBodyHtml = false;
                     //mensaje.From = new MailAddress("pruebas@xofsystems.com","Notificaciones");

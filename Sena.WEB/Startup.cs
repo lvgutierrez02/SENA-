@@ -39,8 +39,7 @@ namespace Sena.WEB
             //Conexión SQl Server
             var conexion = Configuration["ConnectionStrings:conexion_sqlServer"]; //Cadena de conexión
             services.AddDbContext<AppDbContext>(option =>
-            option.UseSqlServer(conexion)
-        );
+            option.UseSqlServer(conexion));
 
             /*
             

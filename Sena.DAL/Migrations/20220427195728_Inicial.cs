@@ -3,52 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Sena.DAL.Migrations
 {
-    public partial class identity : Migration
+    public partial class Inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "Tipo de documento",
-                table: "TiposDocumento",
-                newName: "Nombre");
-
-            migrationBuilder.RenameColumn(
-                name: "NombreCliente",
-                table: "Clientes",
-                newName: "Nombres");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Nombre",
-                table: "TiposDocumento",
-                type: "nvarchar(max)",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(50)");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Email",
-                table: "Clientes",
-                type: "nvarchar(max)",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Documento",
-                table: "Clientes",
-                type: "nvarchar(max)",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Nombres",
-                table: "Clientes",
-                type: "nvarchar(max)",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(50)");
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -68,6 +26,8 @@ namespace Sena.DAL.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Estado = table.Column<bool>(type: "bit", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -86,6 +46,19 @@ namespace Sena.DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TiposDocumento",
+                columns: table => new
+                {
+                    TipoDocumentoId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TiposDocumento", x => x.TipoDocumentoId);
                 });
 
             migrationBuilder.CreateTable(
@@ -194,6 +167,56 @@ namespace Sena.DAL.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Clientes",
+                columns: table => new
+                {
+                    ClienteId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombres = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Documento = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Estado = table.Column<bool>(type: "bit", nullable: false),
+                    TipoDocumentoId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clientes", x => x.ClienteId);
+                    table.ForeignKey(
+                        name: "FK_Clientes_TiposDocumento_TipoDocumentoId",
+                        column: x => x.TipoDocumentoId,
+                        principalTable: "TiposDocumento",
+                        principalColumn: "TipoDocumentoId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "TiposDocumento",
+                columns: new[] { "TipoDocumentoId", "Nombre" },
+                values: new object[,]
+                {
+                    { 1, "TI" },
+                    { 2, "CC" },
+                    { 3, "CE" },
+                    { 4, "PASAPORTE" },
+                    { 5, "CONTRASEÑA" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Clientes",
+                columns: new[] { "ClienteId", "Documento", "Email", "Estado", "Nombres", "TipoDocumentoId" },
+                values: new object[] { 1, "123456789", "generado@generado.com", true, "Cliente generado", 1 });
+
+            migrationBuilder.InsertData(
+                table: "Clientes",
+                columns: new[] { "ClienteId", "Documento", "Email", "Estado", "Nombres", "TipoDocumentoId" },
+                values: new object[] { 2, "987654321", "generado2@generado.com", true, "Cliente generado 2", 2 });
+
+            migrationBuilder.InsertData(
+                table: "Clientes",
+                columns: new[] { "ClienteId", "Documento", "Email", "Estado", "Nombres", "TipoDocumentoId" },
+                values: new object[] { 3, "88990022", "generado3@generado.com", true, "Cliente generado 3", 3 });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -232,6 +255,11 @@ namespace Sena.DAL.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Clientes_TipoDocumentoId",
+                table: "Clientes",
+                column: "TipoDocumentoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -252,60 +280,16 @@ namespace Sena.DAL.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Clientes");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
-            migrationBuilder.RenameColumn(
-                name: "Nombre",
-                table: "TiposDocumento",
-                newName: "Tipo de documento");
-
-            migrationBuilder.RenameColumn(
-                name: "Nombres",
-                table: "Clientes",
-                newName: "NombreCliente");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Tipo de documento",
-                table: "TiposDocumento",
-                type: "nvarchar(50)",
-                nullable: false,
-                defaultValue: "",
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Email",
-                table: "Clientes",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "",
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Documento",
-                table: "Clientes",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "",
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string>(
-                name: "NombreCliente",
-                table: "Clientes",
-                type: "nvarchar(50)",
-                nullable: false,
-                defaultValue: "",
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)",
-                oldNullable: true);
+            migrationBuilder.DropTable(
+                name: "TiposDocumento");
         }
     }
 }
