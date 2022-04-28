@@ -71,6 +71,9 @@ namespace Sena.DAL
                     Documento = "88990022",
                     TipoDocumentoId = 3
                 });
+
+            //ROL
+
         }
     }
 }

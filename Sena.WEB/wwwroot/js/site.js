@@ -56,11 +56,12 @@
 
 
     jQueryAjaxPost = (form, titulo, mensaje) => {
-        alert(form);
-        alert(titulo);
+        //alert(form);
+        //alert(titulo);
         alert(mensaje);
         alertify.confirm(titulo, mensaje,
             function () {
+                alert(mensaje);
                 try {
                     $.ajax({
                         type: 'POST',
@@ -71,7 +72,7 @@
                         success: function (res) {
                             if (res.isValid) {
                                 var mensaje;
-                                if (res.operacion == "Crear") {
+                                if (res.operacion == "crear") {
                                     mensaje = "Registro creado exitosamente";
                                 }
                                 if (res.operacion == "ok") {
@@ -100,7 +101,7 @@
                                 }
                             }
                         },
-                        error: function (err) {
+                        error: function (error) {
                             console.log(err)
                         }
                     })
