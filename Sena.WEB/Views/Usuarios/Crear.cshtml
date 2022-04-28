@@ -1,4 +1,5 @@
 ﻿@model Sena.Business.DTOs.usuarios.RegistrarUsuarioDto
+<!DOCTYPE html>
 @{
     Layout = null;
 }
@@ -6,27 +7,101 @@
 
 }
 
-<form asp-action="Crear" autocomplete="off" id="formulario" onsubmit="return jQueryAjaxPost(this,'Crear usuario', '¿Desea crear el usuario?');">
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registrar Usuario</title>
 
-    <div class="input-group mb-3">
-        <input asp-for="Email" class="form-control">
-        <div class="input-group-append">
-            <div class="input-group-text">
-                <span class="fas fa-envelope"></span>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/adminlte/plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="~/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/adminlte/dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <!-- /.login-logo -->
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a href="../../index2.html" class="h1"><b>Admin</b>LTE</a>
             </div>
-        </div>
+            <div class="card-body">
+                <p class="login-box-msg">Registrarme</p>
 
-    </div>
-    <span asp-validation-for="Email" class="text-danger error"></span>
-    <div class="input-group mb-3">
-        <input asp-for="Password" class="form-control">
-        <div class="input-group-append">
-            <div class="input-group-text">
-                <span class="fas fa-lock"></span>
+                <form asp-action="Crear" asp-controller="Usuarios">
+                    <div class="input-group mb-3">
+                        <input asp-for="Email" class="form-control" placeholder="Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                         <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input asp-for="Password" class="form-control" placeholder="Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                        <span asp-validation-for="Password" class="text-danger error"></span>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input asp-for="RecordarMe" id="remember">
+                                <label for="remember">
+                                    Recuerdame
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <!-- /.col -->
+                    </div>
+                    <br />
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
+                    </div>
+                </form>
+
+
+                <p class="mb-1">
+                    <a asp-action="OlvidePassword">Olvidé contraseña</a>
+                </p>
+                <p class="mb-0">
+                    <a href="register.html" class="text-center">Registro</a>
+                </p>
             </div>
+            <!-- /.card-body -->
         </div>
+        <!-- /.card -->
     </div>
-    <span asp-validation-for="Password" class="text-danger error"></span>
+    <!-- /.login-box -->
+    <!-- jQuery -->
+    <script src="~/adminlte/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/adminlte/dist/js/adminlte.min.js"></script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+</body>
+</html>
+
+
+@*
+
+<form asp-action="Crear" autocomplete="off" id="formulario" onsubmit="return jQueryAjaxPost(this,'Crear usuario', '¿Desea crear el usuario?');" onclick="mostrarModal('@Url.Action("Crear","Usuario",null,Context.Request.Scheme)','Crear Usuario')" class="btn btn-success">
+
+    
+    
     <div class="input-group mb-3">
         <input asp-for="ConfirmarPassword" class="form-control">
         <div class="input-group-append">
@@ -36,17 +111,20 @@
         </div>
 
     </div>
-    <span asp-validation-for="Email" class="text-danger error"></span>
+    <span asp-validation-for="ConfirmarPassword" class="text-danger error"></span>
     <div class="row">
         <div class="col-8">
 
         </div>
         <!-- /.col -->
         <div class="col-4">
-            <button  type="submit" class="btn btn-primary btn-block">Registrar</button>
+            <input value="Registrar" type="submit" class="btn btn-primary btn-block">Registrar</input>
         </div>
         <!-- /.col -->
     </div>
 </form>
+
 <script src="~/js/site.js"></script>
+
 @await Html.PartialAsync("_ValidationScriptsPartial")
+*@
