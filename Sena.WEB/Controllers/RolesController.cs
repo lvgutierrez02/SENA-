@@ -18,7 +18,7 @@ namespace Sena.WEB.Controllers
             _userManager = userManager;
             _roleManager = roleManager;
         }
-        [Authorize(Roles = "Administrador")]
+        //[Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Index()
         {
             ViewBag.Titulo = "Roles";

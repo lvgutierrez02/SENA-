@@ -127,12 +127,12 @@ namespace Sena.WEB.Controllers
                     mensaje.Body = passwordresetLink;
                     mensaje.IsBodyHtml = false;
                     //mensaje.From = new MailAddress("pruebas@xofsystems.com","Notificaciones");
-                    mensaje.From = new MailAddress("pruebas@xofsystems.com", "Notificaciones");
+                    mensaje.From = new MailAddress("lvgd0209@gmail.com", "Notificaciones");
                     SmtpClient smtpClient = new("smtp.gmail.com");
                     smtpClient.Port = 587;
                     smtpClient.UseDefaultCredentials = false;
                     smtpClient.EnableSsl = true;
-                    smtpClient.Credentials = new System.Net.NetworkCredential("pruebas@xofsystems.com", "Tempo123!");
+                    smtpClient.Credentials = new System.Net.NetworkCredential("lvgd0209@gmail.com", "lvgd020900!");
                     smtpClient.Send(mensaje);
 
                 }
