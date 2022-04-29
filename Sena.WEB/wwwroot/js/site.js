@@ -56,12 +56,12 @@
 
 
     jQueryAjaxPost = (form, titulo, mensaje) => {
-        //alert(form);
-        //alert(titulo);
-        alert(mensaje);
+        ////alert(form);
+        ////alert(titulo);
+        ////alert(mensaje);
         alertify.confirm(titulo, mensaje,
             function () {
-                alert(mensaje);
+                //alert(mensaje);
                 try {
                     $.ajax({
                         type: 'POST',

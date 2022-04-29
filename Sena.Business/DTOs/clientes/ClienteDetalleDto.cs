@@ -14,5 +14,6 @@ namespace Sena.Business.DTOs.clientes
         public string Documento { get; set; }
         public string Estado { get; set; }
         public string TipoDocumento { get; set; }
+        
     }
 }

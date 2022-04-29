@@ -58,7 +58,11 @@
                     </ul>
 
                 </li>
-                 <li class="nav-item">
+                 
+
+            @if (User.IsInRole("Administrador")) //dentro va gestion de usuarios y roles
+            {
+               <li class="nav-item">
                     <a asp-action="Index" asp-controller="Usuarios" class="nav-link">
                         <i class="nav-icon fas fa-people-arrows"></i>
                         <p>
@@ -77,10 +81,6 @@
                         </p>
                     </a>
                 </li>
-
-            @if (User.IsInRole("Administrador")) //dentro va gestion de usuarios y roles
-            {
-               
             }
             </ul>
         </nav>

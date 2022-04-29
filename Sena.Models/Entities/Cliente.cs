@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -18,5 +19,6 @@ namespace Sena.Models.Entities
         public bool Estado { get; set; }
         public int TipoDocumentoId { get; set; }
         public virtual TipoDocumento TipoDocumento { get; set; }
+       
     }
 }
