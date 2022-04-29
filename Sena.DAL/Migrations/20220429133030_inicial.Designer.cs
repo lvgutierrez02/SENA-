@@ -10,8 +10,8 @@ using Sena.DAL;
 namespace Sena.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220427195728_Inicial")]
-    partial class Inicial
+    [Migration("20220429133030_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
